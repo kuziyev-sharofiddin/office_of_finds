@@ -10,5 +10,5 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet, basename='categories')
 router.register(r'regions', RegionViewSet, basename='regions')
-router.register(r'finds', FindsViewSet, basename='finds')
+router.register(r'finding', FindsViewSet, basename='finds')
 urlpatterns = router.urls
