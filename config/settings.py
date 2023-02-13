@@ -84,6 +84,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+          'rest_framework.parsers.FormParser',
+          'rest_framework.parsers.MultiPartParser',
+          'rest_framework.parsers.JSONParser',
+   ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
@@ -148,5 +153,4 @@ MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
  
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

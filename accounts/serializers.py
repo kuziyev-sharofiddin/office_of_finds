@@ -10,6 +10,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = (
             'username',
             'email',
+            'is_active',
             'password',
             'password2',
         )
@@ -21,12 +22,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         username = self.validated_data.get('username')
         email = self.validated_data.get("email")
+        is_active = self.validated_data.get('is_active')
         password = self._validated_data.get("password")
         password2 = self.validated_data.get("password2")
         
         
         if password==password2:
-            user = User(username=username, email=email)
+            user = User(username=username, email=email, is_active=is_active)
             user.set_password(password)
             user.save()
             return user
@@ -37,4 +39,3 @@ class UserRegisterSerializer(serializers.ModelSerializer):
                 }
             )
 
-    
