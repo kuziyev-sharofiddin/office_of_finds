@@ -20,7 +20,7 @@ class Region(models.Model):
 
 class Finds(models.Model):
     TYPE = (
-        ("LOSTED","LOSTED"),
+        ("LOST","LOST"),
         ("FOUND",'FOUND')
     )
     title = models.CharField(max_length=200, null=True, blank=True)
