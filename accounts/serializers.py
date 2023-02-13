@@ -11,6 +11,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'is_active',
+            'is_superuser',
+            'is_staff',
             'password',
             'password2',
         )
@@ -23,12 +25,14 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         username = self.validated_data.get('username')
         email = self.validated_data.get("email")
         is_active = self.validated_data.get('is_active')
+        is_superuser = self.validated_data.get('is_superuser')
+        is_staff = self.validated_data.get('is_staff')
         password = self._validated_data.get("password")
         password2 = self.validated_data.get("password2")
         
         
         if password==password2:
-            user = User(username=username, email=email, is_active=is_active)
+            user = User(username=username, email=email, is_active=is_active, is_superuser=is_superuser, is_staff=is_staff)
             user.set_password(password)
             user.save()
             return user
