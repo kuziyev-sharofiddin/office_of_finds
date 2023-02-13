@@ -1,6 +1,14 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "username", "email", "is_active")
+
+
+
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True, write_only =True)
     password2 = serializers.CharField(required=True, write_only =True)
@@ -8,11 +16,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            "first_name",
+            "last_name",
             'username',
             'email',
-            'is_active',
-            'is_superuser',
-            'is_staff',
             'password',
             'password2',
         )
@@ -22,17 +29,16 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         }
         
     def create(self, validated_data):
+        first_name = self.validated_data.get("first_name")
+        last_name = self.validated_data.get("last_name")
         username = self.validated_data.get('username')
         email = self.validated_data.get("email")
-        is_active = self.validated_data.get('is_active')
-        is_superuser = self.validated_data.get('is_superuser')
-        is_staff = self.validated_data.get('is_staff')
         password = self._validated_data.get("password")
         password2 = self.validated_data.get("password2")
         
         
         if password==password2:
-            user = User(username=username, email=email, is_active=is_active, is_superuser=is_superuser, is_staff=is_staff)
+            user = User(username=username, email=email, first_name=first_name, last_name=last_name)
             user.set_password(password)
             user.save()
             return user

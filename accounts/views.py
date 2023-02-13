@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from accounts.serializers import UserRegisterSerializer
+from accounts.serializers import UserRegisterSerializer,UserSerializer
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
@@ -24,10 +24,12 @@ class RegisterAPIView(APIView):
             }
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class UserMeAPIView(APIView):
     def get(self,request):
         user = User.objects.all()
-        serializer = UserRegisterSerializer(user, many=True)
+        serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
 class LogOutAPIView(APIView):
