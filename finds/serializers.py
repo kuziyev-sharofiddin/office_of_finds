@@ -21,6 +21,3 @@ class FindsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Finds
         fields = "__all__"
-
-
-    

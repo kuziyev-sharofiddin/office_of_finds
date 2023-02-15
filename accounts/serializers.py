@@ -1,51 +1,39 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from .models import CustomUser
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ("first_name", "last_name", "username", "email", "is_active")
+        model = CustomUser
+        fields = ("first_name", "last_name", "username", "phone_number",  'password', "is_active")
 
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True, write_only =True)
-    password2 = serializers.CharField(required=True, write_only =True)
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = (
             "first_name",
             "last_name",
-            'username',
-            'email',
+            "username",
+            'phone_number',
             'password',
-            'password2',
         )
         extra_kwargs = {
             'password':{"write_only":True},
-            'password2':{"write_only":True},
         }
         
     def create(self, validated_data):
         first_name = self.validated_data.get("first_name")
         last_name = self.validated_data.get("last_name")
-        username = self.validated_data.get('username')
-        email = self.validated_data.get("email")
+        username = self.validated_data.get("username")
+        phone_number = self.validated_data.get("phone_number")
         password = self._validated_data.get("password")
-        password2 = self.validated_data.get("password2")
         
         
-        if password==password2:
-            user = User(username=username, email=email, first_name=first_name, last_name=last_name)
-            user.set_password(password)
-            user.save()
-            return user
-        else:
-            raise serializers.ValidationError(
-                {
-                    "error":"Both passwords do not match"
-                }
-            )
-
+        user = CustomUser( first_name=first_name, last_name=last_name, username=username, phone_number=phone_number, password=password)
+        user.set_password(password)
+        user.save()
+        return user
