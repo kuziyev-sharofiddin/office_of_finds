@@ -75,7 +75,7 @@ class FindingFilter(filters.FilterSet):
         fields = ['type']
 
 class FindsListAPIView(ListAPIView):
-    # pagination_class = ListPagination
+    pagination_class = ListPagination
     queryset = Finds.objects.all()
     filter_backends = [SearchFilter, DjangoFilterBackend]
     filterset_class = FindingFilter
