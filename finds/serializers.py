@@ -15,8 +15,6 @@ class RegionSerializer(serializers.ModelSerializer):
         
         
 class FindsSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    region = RegionSerializer()
     image = serializers.ImageField(max_length=None, use_url=True)
     class Meta:
         model = Finds
