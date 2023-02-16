@@ -19,3 +19,11 @@ class FindsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Finds
         fields = "__all__"
+
+class FindsDetailSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    region = RegionSerializer()
+    image = serializers.ImageField(max_length=None, use_url=True)
+    class Meta:
+        model = Finds
+        fields = "__all__"

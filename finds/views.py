@@ -80,7 +80,7 @@ class FindsListAPIView(ListAPIView):
     filter_backends = [SearchFilter, DjangoFilterBackend]
     filterset_class = FindingFilter
     search_fields = ['title','type','description', 'region__name','category__name','tag','lost_time','created_at']
-    serializer_class = FindsSerializer
+    serializer_class = FindsDetailSerializer
 
 
 class FindsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
