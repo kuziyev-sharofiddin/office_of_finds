@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'accounts',
+    'phonenumber_field',
     'drf_yasg'
 
 ]
@@ -188,3 +189,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
  
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+PHONENUMBER_DB_FORMAT = "NATIONAL"
+PHONENUMBER_DEFAULT_REGION = 'UZ'
