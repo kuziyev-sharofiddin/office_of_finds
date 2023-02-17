@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import CustomUser
+# from django.contrib.auth.models import User
 
 TYPE = (
     ("LOST","LOST"),

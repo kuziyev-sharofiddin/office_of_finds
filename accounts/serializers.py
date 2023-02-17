@@ -5,7 +5,7 @@ from .models import CustomUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ("first_name",'username', "last_name", "phone_number",  'password', "is_active")
+        fields = ("first_name","last_name", "phone_number",  'username', 'password', "is_active")
 
 
 
@@ -16,8 +16,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = (
             "first_name",
+            'username',
             "last_name",
-            "username",
             'phone_number',
             'password',
         )
@@ -33,7 +33,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         password = self._validated_data.get("password")
         
         
-        user = CustomUser( first_name=first_name, last_name=last_name,username=username, phone_number=phone_number, password=password)
+        user = CustomUser( first_name=first_name, last_name=last_name, username=username, phone_number=phone_number, password=password)
         user.set_password(password)
         user.save()
         return user

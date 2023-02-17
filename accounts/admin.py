@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
 
-    list_display = ["username",'first_name', 'last_name']
+    list_display = ["username", 'first_name', 'last_name', "phone_number"]
     fieldsets = UserAdmin.fieldsets + (
         (None, {"fields":('phone_number',)}),
     )

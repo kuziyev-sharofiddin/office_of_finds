@@ -4,7 +4,8 @@ from accounts.serializers import UserRegisterSerializer,UserSerializer
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from django.contrib.auth.models import User
+from .models import CustomUser
+# from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -28,7 +29,7 @@ class RegisterAPIView(APIView):
 
 class UserMeAPIView(APIView):
     def get(self,request):
-        user = User.objects.all()
+        user = CustomUser.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
